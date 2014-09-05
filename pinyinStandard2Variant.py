@@ -1,23 +1,24 @@
 # coding=utf-8
 import sys
+# define tone dictionary
+chinesePhoneWithToneDic = {'ā':'a1','á':'a2'}
+chinesePhoneWithToneSet = []
 # read file
-chinesePhoneWithTone = {'ā':'a1','á':'a2'}
 f = open(sys.argv[1],'r')
+# load lines
 wordList = list(f)
 # read lines and execute treatment one by one
 for word in wordList:
-    # extract each syllable of one word
+    # extract syllables of one word
     syllables = word.split()
+    # iterate each syllable of one word
     for syllable in syllables:
-        #print(syllable)
-        phone = list(unicode(syllable,'utf-8'))
-        print(phone)
-#        for phone in syllable:
-#            if phone < 'a': 
-#                print('tone<a'+'_'+phone),
-#            elif phone > 'z':
-#                print('tone>z'+'_'+phone),
-#            else:
-#                print('+'+phone),
+        phones = list(unicode(syllable,'utf-8'))
+        for phone in phones:
+            if phone > u'z':
+                chinesePhoneWithToneSet.append(phone)
+                print('_'+phone+'_'),
+            else:
+                print(phone),
         print('\n')
     print("\n")
