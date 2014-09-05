@@ -10,5 +10,14 @@ for word in wordList:
     syllables = word.split()
     for syllable in syllables:
         print(syllable)
-        phone = list(syllable)
-    print(chinesePhoneWithTone['á']+"\n"),
+        phone = list(unicode(syllable,'utf-8'))
+        #print(phone)
+#        for phone in syllable:
+#            if phone < 'a': 
+#                print('tone<a'+'_'+phone),
+#            elif phone > 'z':
+#                print('tone>z'+'_'+phone),
+#            else:
+#                print('+'+phone),
+        print('\n')
+    print("\n")
