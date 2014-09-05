@@ -9,9 +9,9 @@ for word in wordList:
     # extract each syllable of one word
     syllables = word.split()
     for syllable in syllables:
-        print(syllable)
+        #print(syllable)
         phone = list(unicode(syllable,'utf-8'))
-        #print(phone)
+        print(phone)
 #        for phone in syllable:
 #            if phone < 'a': 
 #                print('tone<a'+'_'+phone),
