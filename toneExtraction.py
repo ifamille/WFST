@@ -6,7 +6,7 @@ tone_set = []
 # read file
 f = open(sys.argv[1],'r')
 file_name = sys.argv[1].split('.')
-file_name = file_name[0] + '.pyv'
+file_name = file_name[0] + '.ton'
 print(file_name)
 pen = open(file_name,'w')
 # load lines
@@ -18,24 +18,16 @@ for word in wordList:
     # iterate each syllable of one word
     for syllable in syllables:
         phones = list(unicode(syllable,'utf-8'))
-        numPhones = len(phones)
-        for i in range(numPhones):
-           if phones[i] > u'z':
-               #tone_set.append(phone)
-               #print('_' + tone_dic[phone] + '_'),
-               tone = tone_dic[phones[i]]
-               phones[i] = tone[0]
-               phones.append(tone[1])
-          # else:
-          #     print(phone),
-        print(phones)
-        print('\n')
         for phone in phones:
-            pen.write(phone.encode('utf-8'))
-        pen.write(' ')
-  #  print("\n")
-#for tone in tone_set:
-#    pen.write(tone.encode('utf-8'))
+           if phone > u'z':
+               tone_set.append(phone)
+               print('_' + tone_dic[phone] + '_'),
+           else:
+               print(phone),
+        print('\n')
+    print("\n")
+for tone in tone_set:
+    pen.write(tone.encode('utf-8'))
     pen.write('\n')
 f.close()
 pen.close()
