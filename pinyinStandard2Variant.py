@@ -1,10 +1,14 @@
 # coding=utf-8
 import sys
 # define tone dictionary
-chinesePhoneWithToneDic = {'ā':'a1','á':'a2'}
-chinesePhoneWithToneSet = []
+tone_dic = {'ā':'a1','á':'a2'}
+tone_set = []
 # read file
 f = open(sys.argv[1],'r')
+file_name = sys.argv[1].split('.')
+file_name = file_name[0] + '.ton'
+print(file_name)
+pen = open(file_name,'w')
 # load lines
 wordList = list(f)
 # read lines and execute treatment one by one
@@ -15,10 +19,16 @@ for word in wordList:
     for syllable in syllables:
         phones = list(unicode(syllable,'utf-8'))
         for phone in phones:
-            if phone > u'z':
-                chinesePhoneWithToneSet.append(phone)
-                print('_'+phone+'_'),
-            else:
-                print(phone),
+           if phone > u'z':
+               tone_set.append(phone)
+               print('_' + phone + '_'),
+           else:
+               print(phone),
         print('\n')
     print("\n")
+for tone in tone_set:
+    pen.write(tone.encode('utf-8'))
+    pen.write('\n')
+f.close()
+pen.close()
+
