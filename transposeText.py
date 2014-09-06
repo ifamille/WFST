@@ -8,15 +8,17 @@ print('Executing...\n')
 print('New file ' + file_name + ' generated.')
 print('---------------------------------------')
 fw = open(file_name, 'w')
-punctuation_without_pause=[u'“',u'”',u'-',u'《',u'》']
+punctuation_without_pause=[u'“',u'”',u'-',u'《',u'》',u'·']
 # load file
 textList = list(fr)
 for text in textList:
     vocabularyList = text.split()
     for vocabulary in vocabularyList:
-        if vocabulary
-        print(vocabulary)
-    fw.write('\n')
+        vocabulary = unicode(vocabulary,'utf-8')
+        if vocabulary in punctuation_without_pause:
+            continue
+        else:
+            fw.write(vocabulary.encode('utf-8') + '\n')
 fr.close()
 fw.close()
 
