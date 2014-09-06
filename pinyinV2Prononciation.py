@@ -5,7 +5,8 @@ vowel_set = ['a','o','e','i','u','v']
 fr = open(sys.argv[1],'r')
 file_name = sys.argv[1].split('.')
 file_name = file_name[0] + '.pyp'
-print(file_name + ' generated.')
+print('Executing...\n')
+print('New file ' + file_name + ' generated.')
 fw = open(file_name, 'w')
 # load file
 wordList = list(fr)
@@ -21,6 +22,8 @@ for word in wordList:
         else:
             if syllable[1] in vowel_set:
                 fw.write(syllable[0]+' '+syllable[1:]+' ')
+            elif syllable[1] == 'r':
+                fw.write(syllable + ' ')
             else:
                 fw.write(str(syllable[0:2])+' '+str(syllable[2:])+' ')
     fw.write('\n')
