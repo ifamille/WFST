@@ -7,7 +7,7 @@ tone_set = []
 f = open(sys.argv[1],'r')
 file_name = sys.argv[1].split('.')
 file_name = file_name[0] + '.pyv'
-print(file_name)
+print(file_name+" generated.")
 pen = open(file_name,'w')
 # load lines
 wordList = list(f)
