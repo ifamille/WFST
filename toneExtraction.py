@@ -7,7 +7,6 @@ tone_set = []
 f = open(sys.argv[1],'r')
 file_name = sys.argv[1].split('.')
 file_name = file_name[0] + '.ton'
-print(file_name)
 pen = open(file_name,'w')
 # load lines
 wordList = list(f)
@@ -29,6 +28,10 @@ for word in wordList:
 for tone in tone_set:
     pen.write(tone.encode('utf-8'))
     pen.write('\n')
+print('---------------------------------------')
+print('Executing...\n')
+print('Congratuation, new file ' + file_name + ' has been generated.')
+print('---------------------------------------')
 f.close()
 pen.close()
 

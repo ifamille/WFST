@@ -5,10 +5,6 @@ vowel_set = ['a','o','e','i','u','v']
 fr = open(sys.argv[1],'r')
 file_name = sys.argv[1].split('.')
 file_name = file_name[0] + '.pyp'
-print('---------------------------------------')
-print('Executing...\n')
-print('New file ' + file_name + ' generated.')
-print('---------------------------------------')
 fw = open(file_name, 'w')
 # load file
 wordList = list(fr)
@@ -35,6 +31,10 @@ for word in wordList:
             else:
                 fw.write(str(syllable[0:2])+' '+str(syllable[2:])+' ')
     fw.write('\n')
+print('---------------------------------------')
+print('Executing...\n')
+print('Congratuation, new file ' + file_name + ' has been generated.')
+print('---------------------------------------')
 fr.close()
 fw.close()
 
