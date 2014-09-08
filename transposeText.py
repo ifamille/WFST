@@ -74,35 +74,76 @@ punctuation_without_pause=[u'“',u'”',u'-',u'《',u'》',u'·']
 textList = list(fr)
 for text in textList:
     vocabularyList = text.split()
+    # iterate each vocabulary
     for vocabulary in vocabularyList:
         vocabulary = unicode(vocabulary,'utf-8')
+        # vocabuary has only one character, so may be a punctuation, a number or character.
         if len(vocabulary)==1:
-            if vocabulary in punctuation_without_pause:
+            #print('single syllable:'+vocabulary)
+            # vocabulary is a punctuation in the list, ignore it
+            # wheather it is not a character or number.
+            matchPunctuation = re.match(r'^\W$', vocabulary, re.I|re.U|re.M)
+            if matchPunctuation != None:
                 continue
             else:
-                matchPunctuation = re.match(r'^\W$', vocabulary, re.I|re.U|re.M)
-                if matchPunctuation != None:
-                    continue
-                else:
-                    # in the case of single number
-                    matchSingleNum = re.match(r'^\d$', vocabulary, re.I|re.U|re.M)
-                    if matchSingleNum != None:
-                        vocabulary = number2Word(vocabulary)
-                    fw.write(vocabulary.encode('utf-8')+'\n')
+                # in the case of single number
+                matchSingleNum = re.match(r'^\d$', vocabulary, re.I|re.U|re.M)
+                if matchSingleNum != None:
+                    vocabulary = number2Word(vocabulary)
+                fw.write(vocabulary.encode('utf-8')+'\n')
         else:
-            # use regular expression to extract possible number
-            matchNum = re.match(r'^[0-9]+(.)[0-9]*', vocabulary, re.I|re.U|re.M)
-            # find vocabulary contains number, like 18ge
-            if matchNum !=None:
-                number = matchNum.group(0)
-                # part of number
-                numberInWord = numbers2Word(number)
-                fw.write(numberInWord.encode('utf-8')+'\n')
-                # part of hanzi
-                fw.write(vocabulary[len(number):].encode('utf-8')+'\n')
-            # didn't find vocabulary contains number.
+            isNum = vocabulary[0] >='0' and vocabulary[0]<='9'
+            number = ''
+            if isNum:
+                number += vocabulary[0]
             else:
-                fw.write(vocabulary.encode('utf-8') + '\n')
+                fw.write(vocabulary[0].encode('utf-8'))
+            for c in range(1,len(vocabulary)):
+                flag = vocabulary[c]=='.' or (vocabulary[c] >='0' and vocabulary[c]<='9')
+                if isNum and flag:
+                    number +=vocabulary[c]
+                    if c == len(vocabulary)-1:
+                        numberToWord = numbers2Word(number)
+                        fw.write(numberToWord.encode('utf-8'))
+                elif not(isNum or flag):
+                    fw.write(vocabulary[c].encode('utf-8'))
+                else:
+                    if isNum:
+                        if vocabulary[c]=='%':
+                            pourcent = u'百分之'
+                            fw.write(pourcent.encode('utf-8'))
+                            fw.write('\n')
+                            numberToWord = numbers2Word(number)
+                            fw.write(numberToWord.encode('utf-8'))
+                        else:
+                            numberToWord = numbers2Word(number)
+                            fw.write(numberToWord.encode('utf-8'))
+                            fw.write('\n')
+                            fw.write(vocabulary[c].encode('utf-8'))
+                    else:
+                        fw.write('\n')
+                        number = vocabulary[c]
+                isNum = flag
+            fw.write('\n')
+
+
+            #print('multi syllables: '+vocabulary)
+            ## use regular expression to extract possible number
+            #matchNum = re.match(r'\d+(\.)?\d*', vocabulary, re.I|re.U)
+            ## find vocabulary contains number, like 18ge
+            #if matchNum !=None:
+            #    print('multi syllables - contains number: '+vocabulary)
+            #    number = matchNum.group(0)
+            #    print(number)
+            #    ## part of hanzi
+            #    #fw.write(vocabulary[0:len(vocabulary)-len(number)].encode('utf-8')+'\n')
+            #    # part of number
+            #    numberInWord = numbers2Word(number)
+            #    fw.write(numberInWord.encode('utf-8')+'\n')
+            ## didn't find vocabulary contains number.
+            #else:
+            #    print('multi syllables - not contains number: '+vocabulary)
+            #    fw.write(vocabulary.encode('utf-8') + '\n')
 print('---------------------------------------')
 print('Executing...\n')
 print('Congratuation, new file ' + file_name + ' has been generated.')
