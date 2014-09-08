@@ -37,5 +37,3 @@ print('Congratuation, new file ' + file_name + ' has been generated.')
 print('---------------------------------------')
 fr.close()
 fw.close()
-
-
