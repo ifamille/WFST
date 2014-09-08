@@ -4,12 +4,16 @@ import re
 # convert number to word
 def numbers2Word(numbers):
     parts = numbers.split('.')
+    word = ''
     # in the case of integer
-    if len(parts)==1:
-        # calculate amount of integer's bit
-        bit = len(parts[0])
-        for i in range(bit):
-            print(number2Word(parts[0][bit-i]))
+    # calculate amount of integer's bit
+    bit = len(parts[0])
+    for i in range(bit):
+        word += number2Word(parts[0][i])+bit2Word(bit-i)
+    if len(parts)==2:
+        word += u'点'
+        for j in range(len(parts[1])):
+            word += number2Word(parts[1][j])
     return word
 
 # convert bit to word, for example, 5 to wan, 4 to qian, 3 to bai
@@ -59,6 +63,7 @@ def number2Word(number):
     else:
         word = u'九'
     return word
+
 # read text file by console
 fr = open(sys.argv[1],'r')
 # set the extension name as tt
@@ -76,18 +81,23 @@ for text in textList:
                 continue
             else:
                 matchPunctuation = re.match(r'^\W$', vocabulary, re.I|re.U|re.M)
-                if matchPunctuation !=None:
+                if matchPunctuation != None:
                     continue
                 else:
+                    # in the case of single number
+                    matchSingleNum = re.match(r'^\d$', vocabulary, re.I|re.U|re.M)
+                    if matchSingleNum != None:
+                        vocabulary = number2Word(vocabulary)
                     fw.write(vocabulary.encode('utf-8')+'\n')
         else:
             # use regular expression to extract possible number
-            matchNum = re.match(r'^[0-9]+', vocabulary, re.I|re.U|re.M)
+            matchNum = re.match(r'^[0-9]+(.)[0-9]*', vocabulary, re.I|re.U|re.M)
             # find vocabulary contains number, like 18ge
             if matchNum !=None:
                 number = matchNum.group(0)
                 # part of number
-                fw.write(number.encode('utf-8')+'\n')
+                numberInWord = numbers2Word(number)
+                fw.write(numberInWord.encode('utf-8')+'\n')
                 # part of hanzi
                 fw.write(vocabulary[len(number):].encode('utf-8')+'\n')
             # didn't find vocabulary contains number.
