@@ -8,23 +8,33 @@ def numbers2Word(numbers):
     # in the case of integer
     # calculate amount of integer's bit
     bit = len(parts[0])
+    print(bit)
     zero = ''
     for i in range(bit):
         if parts[0][i] == '0':
-            print('zero, continue')
-            zero = u'零'
-            continue
+            if bit-i==5:
+                word+=bit2Word(bit-i)
+                zero == ''
+            else:
+                zero = u'零'
+                continue
         else:
-            print(parts[0][i]+' i='+str(i))
+            print('bit='+str(bit)+', i='+str(i)+ ' element='+ parts[0][i])
             if i == bit-2:
                 if parts[0][i]=='1' and parts[0][i+1]=='0':
                     word += zero
                     word += u'十'
+                else:
+                    word += zero
+                    zero =''
+                    word += number2Word(parts[0][i])+bit2Word(bit-i)
+            elif bit == 6 and i==0 and parts[0][i]=='1':
+                print('shi')
+                word += u'十'
             else:
                 word += zero
                 zero = ''
                 word += number2Word(parts[0][i])+bit2Word(bit-i)
-                print(word)
     if len(parts)==2:
         word += u'点'
         for j in range(len(parts[1])):
