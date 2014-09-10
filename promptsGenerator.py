@@ -4,14 +4,22 @@ import re
 import os
 
 path = './ATs'
+file_name = 'prompts'
+fw = open(file_name, 'w')
 if os.path.exists(path):
     print('Loading...')
     for file_or_folder in os.listdir(path):
-        print(file_or_folder)
+        full_path = os.path.join(path, file_or_folder)
         # judge wheather one object in the directory is a file.
-        if os.path.isfile(os.path.join(path,file_or_folder)):
-        else:
-            print('NO')
+        if os.path.isfile(full_path):
+            fw.write('*/')
+            f_name, f_extension = file_or_folder.split('.')
+            fw.write(f_name+' ')
+            ff = open(full_path, 'r')
+            contents = list(ff)
+            fw.write(contents[0])
+            ff.close()
+            fw.write('\n')
 else:
     print('Wrong path!')
 ## read text file by console
@@ -22,7 +30,6 @@ else:
 ## load file
 #textList = list(fr)
 
-file_name = 'prompts'
 
 print('---------------------------------------')
 print('Executing ...\n')
