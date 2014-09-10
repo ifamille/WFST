@@ -4,9 +4,9 @@ import re
 import os
 
 # original directory
-directory = './SEGs/'
+directory = './PYSs/'
 # objective directory
-destination_directory = './TTs/'
+destination_directory = './PYVs/'
 # backup directory
 backup_directory = './Backup/'
 if os.path.exists(directory):
@@ -18,11 +18,11 @@ if os.path.exists(directory):
         # generate full file path which to save the new file generated.
         name_extension = str(file_or_folder).split('.')
         name = str(name_extension[0])
-        destination_file_path = os.path.join(destination_directory, name + '.tt') 
+        destination_file_path = os.path.join(destination_directory, name + '.pyv') 
         # judge wheather one object in the directory is a file.
         if os.path.isfile(file_path):
             # execute statement.
-            os.system("python transposeText.py " + file_or_folder)
+            os.system("python pinyinStandard2Variant.py " + file_or_folder)
             # execute backcup and clean operations
             os.system("cp " + file_path +" " + backup_directory + directory)
             os.system("cp " + destination_file_path +" " + backup_directory + destination_directory)
@@ -32,5 +32,5 @@ else:
 
 print('---------------------------------------')
 print('Executing ...\n')
-print('Congratuation, all the files in directory <SEGs> have been transposed.')
+print('Congratuation, all the files in directory <PYSs> have been transformed.')
 print('---------------------------------------')
