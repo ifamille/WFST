@@ -6,7 +6,7 @@ tone_set = []
 # read file
 f = open(sys.argv[1],'r')
 file_name = sys.argv[1].split('.')
-file_name = file_name[0] + '.ton'
+file_name = file_name[0] + '.tone'
 pen = open(file_name,'w')
 # load lines
 wordList = list(f)
