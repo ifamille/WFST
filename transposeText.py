@@ -90,10 +90,13 @@ def number2Word(number):
     return word
 
 # read text file by console
-fr = open(sys.argv[1],'r')
+directory = './SEGs/'
+destination_directory = './TTs/'
+fr = open(directory+sys.argv[1],'r')
 # set the extension name as tt
-file_name = str(sys.argv[1]) + '.tt'
-fw = open(file_name, 'w')
+name_extension = str(sys.argv[1]).split('.')
+file_name = str(name_extension[0]) + '.tt'
+fw = open(destination_directory + file_name, 'w')
 punctuation_without_pause=[u'“',u'”',u'-',u'《',u'》',u'·']
 # load file
 textList = list(fr)
@@ -151,24 +154,6 @@ for text in textList:
                 isNum = flag
             fw.write('\n')
 
-
-            #print('multi syllables: '+vocabulary)
-            ## use regular expression to extract possible number
-            #matchNum = re.match(r'\d+(\.)?\d*', vocabulary, re.I|re.U)
-            ## find vocabulary contains number, like 18ge
-            #if matchNum !=None:
-            #    print('multi syllables - contains number: '+vocabulary)
-            #    number = matchNum.group(0)
-            #    print(number)
-            #    ## part of hanzi
-            #    #fw.write(vocabulary[0:len(vocabulary)-len(number)].encode('utf-8')+'\n')
-            #    # part of number
-            #    numberInWord = numbers2Word(number)
-            #    fw.write(numberInWord.encode('utf-8')+'\n')
-            ## didn't find vocabulary contains number.
-            #else:
-            #    print('multi syllables - not contains number: '+vocabulary)
-            #    fw.write(vocabulary.encode('utf-8') + '\n')
 print('---------------------------------------')
 print('Executing...\n')
 print('Congratuation, new file ' + file_name + ' has been generated.')
