@@ -7,6 +7,7 @@ import os
 directory = './SEGs/'
 # objective directory
 destination_directory = './TTs/'
+PYSs_directory = './PYSs/'
 # backup directory
 backup_directory = './Backup/'
 if os.path.exists(directory):
@@ -26,11 +27,12 @@ if os.path.exists(directory):
             # execute backcup and clean operations
             os.system("cp " + file_path +" " + backup_directory + directory)
             os.system("cp " + destination_file_path +" " + backup_directory + destination_directory)
+            os.system("touch " + PYSs_directory + name + ".pys")
             os.system("rm " + file_path)
 else:
     print('Wrong path!')
 
 print('---------------------------------------')
 print('Executing ...\n')
-print('Congratuation, all the files in directory <SEGs> have been transposed.')
+print('Congratuation, all the files in directory <SEGs> have been transposed in ' + destination_directory + '.')
 print('---------------------------------------')
