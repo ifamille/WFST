@@ -9,6 +9,7 @@ directory = './PYSs/'
 destination_directory = './PYVs/'
 # backup directory
 backup_directory = './Backup/'
+transpose_directory = './TTs/'
 if os.path.exists(directory):
     print('Loading...')
     # rescutive
@@ -27,6 +28,7 @@ if os.path.exists(directory):
             os.system("cp " + file_path +" " + backup_directory + directory)
             os.system("cp " + destination_file_path +" " + backup_directory + destination_directory)
             os.system("rm " + file_path)
+            os.system("rm " + os.path.join(transpose_directory, name + '.tt'))
 else:
     print('Wrong path!')
 
