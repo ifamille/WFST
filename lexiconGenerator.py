@@ -20,10 +20,8 @@ if os.path.exists(word_directory) and os.path.exists(pronunciation_directory):
             os.system('paste -d " " ' + word_path + ' ' + pronunciation_path + ' > ' + new_path)
             file_list += new_path
             file_list += ' '
-    print('Start')
     os.system("cat " + file_list + " > " + destination_directory + lexicon_name)
     #os.system("cat " + file_list + "i > " + destination_directory + lexicon_name)
-    print('Finished')
     for file_or_folder in os.listdir(destination_directory):
         name_extension = str(file_or_folder).split('.')
         print(file_or_folder)

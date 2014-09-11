@@ -4,7 +4,7 @@ import re
 import os
 
 # original directory
-word_directory = './PYWVox/'
+word_directory = './PYWLs/'
 intermediate_word_directory = './PYWs/'
 # objective directory
 pronunciation_directory = './PYPLs/'
