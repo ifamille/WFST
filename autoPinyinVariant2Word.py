@@ -8,6 +8,7 @@ directory = './PYVs/'
 # objective directory
 destination_directory = './PYWs/'
 # backup directory
+voxforge_directory = './PYWVox/'
 backup_directory = './Backup/'
 if os.path.exists(directory):
     print('Loading...')
@@ -26,6 +27,8 @@ if os.path.exists(directory):
             # execute backcup and clean operations
             os.system("cp " + file_path +" " + backup_directory + directory)
             os.system("cp " + destination_file_path +" " + backup_directory + destination_directory)
+            os.system("awk '{print $1, \"[\"$1\"]\", $2}' " + destination_file_path + " > " + os.path.join(voxforge_directory, name + '.pywv'))
+            os.system("cp " + os.path.join(voxforge_directory, name + '.pywv') + " " + backup_directory + voxforge_directory)
             #os.system("rm " + file_path)
 else:
     print('Wrong path!')
