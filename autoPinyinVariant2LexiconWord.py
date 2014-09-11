@@ -36,8 +36,8 @@ if os.path.exists(directory):
             os.system("mv " + intermediate_file_path + " " + destination_directory)
             # copy result to backup directory
             os.system("cp " + destination_file_path +" " + backup_directory + destination_directory)
-            os.system("awk '{print $1, \"[\"$1\"]\", $2}' " + destination_file_path + " > " + os.path.join(voxforge_directory, name + '.pyw'))
-            os.system("cp " + os.path.join(voxforge_directory, name + '.pyw') + " " + backup_directory + voxforge_directory)
+            os.system("awk '{print $1, \"[\"$1\"]\", $2}' " + destination_file_path + " > " + os.path.join(voxforge_directory, name + '.pywv'))
+            os.system("cp " + os.path.join(voxforge_directory, name + '.pywv') + " " + backup_directory + voxforge_directory)
             # delete source file from original directory
             # os.system("rm " + file_path)
             os.system("rm " + os.path.join(intermediate_directory, file_or_folder))

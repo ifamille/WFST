@@ -3,7 +3,7 @@ import sys
 import re
 import os
 
-word_directory = './PYWs/'
+word_directory = './PYWVox/'
 pronunciation_directory = './PYPs/'
 destination_directory = './Components/'
 lexicon_name = 'voxforge_lexicon_part_1'
@@ -12,7 +12,7 @@ if os.path.exists(word_directory) and os.path.exists(pronunciation_directory):
     file_list = ''
     for file_or_folder in os.listdir(word_directory):
         name_extension = str(file_or_folder).split('.')
-        word_path = os.path.join(word_directory, str(name_extension[0]) + '.pyw')
+        word_path = os.path.join(word_directory, str(name_extension[0]) + '.pywv')
         pronunciation_path = os.path.join(pronunciation_directory, str(name_extension[0]) + '.pyp')
         new_path = os.path.join(destination_directory, str(name_extension[0]) + '.tmp')
         # judge wheather one object in the directory is a file.
@@ -27,6 +27,8 @@ if os.path.exists(word_directory) and os.path.exists(pronunciation_directory):
         print(file_or_folder)
         # judge wheather one object in the directory is a file.
         if len(name_extension)==2 and name_extension[1]=='tmp':
+            os.remove(word_path)
+            os.remove(pronunciation_path)
             os.remove(os.path.join(destination_directory, file_or_folder))
 else:
     print('Wrong path!')
