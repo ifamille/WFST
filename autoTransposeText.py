@@ -34,5 +34,5 @@ else:
 
 print('---------------------------------------')
 print('Executing ...\n')
-print('Congratuation, all the files in directory <SEGs> have been transposed in ' + destination_directory + '.')
+print('Congratuation, all the files in directory <SEGs> have been transposed into ' + destination_directory + ' directory.')
 print('---------------------------------------')

@@ -4,8 +4,9 @@ import re
 import os
 
 path = './ATs'
+destination_directory = './Components/'
 file_name = 'prompts'
-fw = open(file_name, 'w')
+fw = open(destination_directory + file_name, 'w')
 if os.path.exists(path):
     print('Loading...')
     for file_or_folder in os.listdir(path):

@@ -4,9 +4,9 @@ import re
 import os
 
 # original directory
-directory = './OTs/'
+directory = './PYVs/'
 # objective directory
-destination_directory = './SEGs/'
+destination_directory = './PYPs/'
 # backup directory
 backup_directory = './Backup/'
 if os.path.exists(directory):
@@ -16,11 +16,13 @@ if os.path.exists(directory):
         # generate full file path which to be treated
         file_path = os.path.join(directory, file_or_folder)
         # generate full file path which to save the new file generated.
-        destination_file_path = os.path.join(destination_directory, file_or_folder+'.seg') 
+        name_extension = str(file_or_folder).split('.')
+        name = str(name_extension[0])
+        destination_file_path = os.path.join(destination_directory, name + '.pyp') 
         # judge wheather one object in the directory is a file.
         if os.path.isfile(file_path):
             # execute statement.
-            os.system("sh ./Stanford/segment.sh ctb " + file_path +" utf8 0 > " + destination_file_path)
+            os.system("python pinyinVariant2Pronunciation.py " + file_or_folder)
             # execute backcup and clean operations
             os.system("cp " + file_path +" " + backup_directory + directory)
             os.system("cp " + destination_file_path +" " + backup_directory + destination_directory)
@@ -30,5 +32,5 @@ else:
 
 print('---------------------------------------')
 print('Executing ...\n')
-print('Congratuation, all the files in directory <OTs> have been segmented into ' + destination_directory + ' directory.')
+print('Congratuation, all the files in directory <PYVs> have been transformed into ' + destination_directory + ' directory.')
 print('---------------------------------------')

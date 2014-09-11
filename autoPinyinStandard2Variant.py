@@ -32,5 +32,5 @@ else:
 
 print('---------------------------------------')
 print('Executing ...\n')
-print('Congratuation, all the files in directory <PYSs> have been transformed.')
+print('Congratuation, all the files in directory <PYSs> have been transformed into ' + destination_directory +' directory.')
 print('---------------------------------------')
