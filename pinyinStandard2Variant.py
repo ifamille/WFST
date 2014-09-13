@@ -33,6 +33,8 @@ for word in wordList:
                 phones[i] = tone[0]
                 # conserve tone at the end of list of phone
                 phones.append(tone[1])
+            elif phones[i] < u'a':
+                hasTone = True
         if not hasTone:
             phones.append(u'0')
         # iterate each element in the list of phones and print them into a file
