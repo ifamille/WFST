@@ -27,7 +27,7 @@ if os.path.exists(word_directory) and os.path.exists(pronunciation_directory):
         # judge wheather one object in the directory is a file.
         if len(name_extension)==2 and name_extension[1]=='tmp':
             os.remove(os.path.join(word_directory, str(name_extension[0]) + '.pywv'))
-            os.remove(os.path.join(pronunciation_directory, str(name_extension[0]) + '.pyp'))
+            #os.remove(os.path.join(pronunciation_directory, str(name_extension[0]) + '.pyp'))
             os.remove(os.path.join(destination_directory, file_or_folder))
 else:
     print('Wrong path!')

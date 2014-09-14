@@ -4,7 +4,7 @@ import re
 import os
 
 hmmdefs_iPath = '../voxforge/manual/hmm0/hmmdefs'
-proto_iPath = '../voxforge/manual/proto'
+proto_iPath = '../voxforge/manual/hmm0/proto'
 oDirectory = '../voxforge/manual/hmm0/'
 oFile_name = 'hmmdefs_'
 fHmmdefs = open(hmmdefs_iPath, 'r')
@@ -14,6 +14,8 @@ if os.path.exists(hmmdefs_iPath) and os.path.exists(proto_iPath):
     print('Loading...')
     phones = list(fHmmdefs)
     proto = list(fProto)
+    proto.pop(0)
+    proto.pop(0)
     proto.pop(0)
     proto.pop(0)
     for phone in phones:

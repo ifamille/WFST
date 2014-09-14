@@ -31,7 +31,7 @@ if os.path.exists(word_directory) and os.path.exists(pronunciation_directory):
             # execute statement.
             os.system('paste -d " " ' + word_path + ' ' + pronunciation_path + ' > ' + lexicon_path)
             os.system('rm ' + word_path)
-            os.system('rm ' + pronunciation_path)
+            # os.system('rm ' + pronunciation_path)
             file_list += lexicon_path
             file_list += ' '
     os.system("cat " + file_list + " > " + destination_directory + lexicon_name)
