@@ -132,13 +132,17 @@ for text in textList:
             # wheather it is not a character or number.
             matchPunctuation = re.match(r'^\W$', vocabulary, re.I|re.U|re.M)
             if matchPunctuation != None:
-                wFile.write(vocabulary.encode('utf-8')+'\n')
+                #wFile.write(vocabulary.encode('utf-8')+'\n')
+                wFile.write('\n')
             else:
-                # in the case of single number
-                matchSingleNum = re.match(r'^\d$', vocabulary, re.I|re.U|re.M)
-                if matchSingleNum != None:
-                    vocabulary = number2Word(vocabulary)
-                wFile.write(vocabulary.encode('utf-8')+'\n')
+                if vocabulary[0] >= u'\uff10' and vocabulary[0] <= u'\uff19':
+                    wFile.write(fullwidth2Halfwidth(vocabulary[0]).encode('utf-8'))
+                else:
+                    # in the case of single number
+                    matchSingleNum = re.match(r'^\d$', vocabulary, re.I|re.U|re.M)
+                    if matchSingleNum != None:
+                        vocabulary = number2Word(vocabulary)
+                    wFile.write(vocabulary.encode('utf-8')+'\n')
         else:
             isNum = vocabulary[0] >='0' and vocabulary[0]<='9'
             number = ''
