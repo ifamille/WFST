@@ -13,8 +13,8 @@ if os.path.exists(iDirectory) and os.path.exists(oDirectory):
     for file_or_folder in os.listdir(iDirectory):
         file_path = os.path.join(iDirectory,file_or_folder)
         if os.path.isfile(file_path):
-            name, extension = str(file_or_folder).split('.')
-            fw.write('iconv -f gb2312 -t UTF-8 ' + file_or_folder + ' > ' + name)
+            name = str(file_or_folder).split('.')
+            fw.write('iconv -f gb2312 -t UTF-8 ' + file_or_folder + ' > ' + '_' + name[0])
             fw.write('\n')
 
 else:
