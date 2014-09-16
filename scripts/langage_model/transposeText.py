@@ -127,6 +127,9 @@ for text in textList:
     for vocabulary in vocabularyList:
         vocabulary = unicode(vocabulary,'utf-8')
         # vocabuary has only one character, so may be a punctuation, a number or character.
+        matchPunctuation = re.match(r'^[a-zA-Z]$', vocabulary[0], re.I|re.U|re.M)
+        if matchPunctuation != None:
+            continue
         if len(vocabulary)==1:
             # vocabulary is a punctuation in the list, ignore it
             # wheather it is not a character or number.
